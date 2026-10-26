@@ -1,0 +1,42 @@
+# 将 dsh-cross-session-gated 挂载到 DSH 0.2.x profile。
+# 本 fork 在原始 dsh-cross-session-approval 之上增加：
+#   • 工具级开关（tools.* / allowXxx）：关闭 ⇒ 该工具不注册，模型完全看不到。
+#   • 全局会话白名单（allowedSessions）：只有名单内的会话可被任何工具寻址。
+#
+# 开关默认值刻意保守：只有 send / reply / status 打开，其余全关。
+- insert:
+    - id: cross-session-approval
+      name: 'dsh-cross-session-gated'
+      inject:
+        - tools
+        - agents
+        - sessionPersistence
+        - agentDefaultModel
+        - agentPresets
+        - workspaceRegistry
+        - sessionQuery
+        - sessionTitle
+      config:
+        # 派活登记保存在 <工作区>/<stateDir>/registry.json
+        stateDir: .cross-session
+
+        # ── 全局会话白名单 ──────────────────────────────────────────────
+        # 每行一个 session-<uuid> 或 cs_ 别名；留空 = 不限制（不推荐）。
+        allowedSessions: ''
+
+        # ── 工具开关（true / false）────────────────────────────────────
+        # 关闭 ⇒ tools.register 根本不执行，模型没有该工具。
+        allowSpawn: 'false'      # 创建新会话
+        allowSend: 'true'        # 向会话发消息
+        allowReply: 'true'       # 向会话回信
+        allowStatus: 'true'      # 查看派活登记
+        allowRead: 'false'       # 读取会话内容
+        allowList: 'false'       # 列出会话
+        allowBroadcast: 'false'  # 一对多派发
+        allowRename: 'false'     # 重命名会话
+        allowArchive: 'false'    # 归档会话
+        allowApprove: 'false'    # 处理跨会话提权审批
+
+        # ── 子会话权限夹紧（沿用原插件语义）──────────────────────────
+        spawnPermission: cap     # cap | off（开审批桥必须 cap）
+        forkPermission: cap      # cap | strict | off
