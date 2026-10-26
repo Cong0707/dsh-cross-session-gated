@@ -47,7 +47,7 @@
   "author": "forked from zsjs110110-cpu/dsh-cross-session-approval",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OWNER/dsh-cross-session-gated.git"
+    "url": "git+https://github.com/Cong0707/dsh-cross-session-gated.git"
   },
   "dependencies": {
     "@deepseek-ai/schemastery": "~3.18.5"
@@ -61,5 +61,9 @@
     "@deepseek-ai/dsh-permission-presets": ">=0.2.0-rc.2 <0.3.0",
     "@deepseek-ai/dsh-user-approval": ">=0.2.0-rc.2 <0.3.0",
     "@deepseek-ai/dsh-session": ">=0.2.0-rc.2 <0.3.0"
+  },
+  "homepage": "https://github.com/Cong0707/dsh-cross-session-gated#readme",
+  "bugs": {
+    "url": "https://github.com/Cong0707/dsh-cross-session-gated/issues"
   }
 }
